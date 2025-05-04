@@ -55,6 +55,8 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ initialImage, onIm
       });
       
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server response:', response.status, errorText);
         throw new Error('Failed to upload image');
       }
       

@@ -17,17 +17,11 @@ export const AdminHeader = () => {
           <LayoutDashboard className="w-5 h-5 text-blue-500" />
           <div>
             <p className="text-sm text-muted-foreground">Products</p>
-            <p className="font-medium">45 Products</p>
+            <p className="font-medium">9 Products</p>
           </div>
         </div>
         
-        <div className="flex items-center gap-2">
-          <ShoppingBag className="w-5 h-5 text-green-500" />
-          <div>
-            <p className="text-sm text-muted-foreground">Orders</p>
-            <p className="font-medium">12 New</p>
-          </div>
-        </div>
+        
         
         <div className="flex items-center gap-2">
           <User className="w-5 h-5 text-purple-500" />
