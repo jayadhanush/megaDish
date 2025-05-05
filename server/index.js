@@ -30,6 +30,7 @@ app.use(cors({
 }));
 
 // Serve uploaded files
+console.log(__dirname);
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // Special handling for Stripe webhook endpoint (needs raw body)

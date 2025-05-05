@@ -57,7 +57,7 @@ export const ShippingForm: React.FC<ShippingFormProps> = ({ initialValues, onSub
               <FormItem>
                 <FormLabel>Street Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="123 Main St" {...field} />
+                  <Input placeholder="65,Anna Nagar" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -72,7 +72,7 @@ export const ShippingForm: React.FC<ShippingFormProps> = ({ initialValues, onSub
                 <FormItem>
                   <FormLabel>City</FormLabel>
                   <FormControl>
-                    <Input placeholder="New York" {...field} />
+                    <Input placeholder="Erode" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -86,7 +86,7 @@ export const ShippingForm: React.FC<ShippingFormProps> = ({ initialValues, onSub
                 <FormItem>
                   <FormLabel>Postal Code</FormLabel>
                   <FormControl>
-                    <Input placeholder="10001" {...field} />
+                    <Input placeholder="638050" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -101,7 +101,7 @@ export const ShippingForm: React.FC<ShippingFormProps> = ({ initialValues, onSub
               <FormItem>
                 <FormLabel>Country</FormLabel>
                 <FormControl>
-                  <Input placeholder="United States" {...field} />
+                  <Input placeholder="TamilNadu" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

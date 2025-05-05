@@ -82,7 +82,7 @@ export const AnalyticsAdmin = () => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'INR'
     }).format(amount);
   };
 
@@ -90,7 +90,7 @@ export const AnalyticsAdmin = () => {
   const overviewCards = [
     {
       title: 'Total Revenue',
-      value: formatCurrency(24500),
+      value: formatCurrency(5700500),
       description: '10% increase from last month',
       trend: 'up'
     },
@@ -108,7 +108,7 @@ export const AnalyticsAdmin = () => {
     },
     {
       title: 'Avg. Order Value',
-      value: formatCurrency(168.93),
+      value: formatCurrency(16800.93),
       description: '3% decrease from last month',
       trend: 'down'
     }

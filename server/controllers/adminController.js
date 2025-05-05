@@ -135,7 +135,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    await product.remove();
+    await product.deleteOne();
     res.json({ success: true, message: 'Product removed' });
   } else {
     res.status(404);
@@ -185,11 +185,12 @@ const uploadProductImage = asyncHandler(async (req, res) => {
 
   try {
     // Option 1: Store image in MongoDB using GridFS
+    console.log("hh");
     const db = mongoose.connection.db;
     const bucket = new GridFSBucket(db, {
       bucketName: 'productImages'
     });
-
+    console.log(req.file.path);
     // Read the file from disk
     const fileStream = fs.createReadStream(req.file.path);
     

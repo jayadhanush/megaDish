@@ -36,14 +36,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ amount, orderId, onSuccess, o
       try {
         const response = await paymentService.createPaymentIntent({
           amount,
-          currency: 'usd',
+          currency: 'inr', // Change currency to INR for rupees
           orderId
         });
         setClientSecret(response.clientSecret);
-      } catch (err) {
+            } catch (err) {
         console.error('Error creating payment intent:', err);
         onError('Failed to initialize payment. Please try again.');
-      }
+            }
     };
 
     createIntent();

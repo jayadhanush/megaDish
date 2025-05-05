@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -20,7 +19,9 @@ const { protect, admin } = require('../middleware/authMiddleware');
 // Set up multer storage for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'server/uploads/');
+    console.log("File upload destination:", file);
+    console.log("File destination:", path.join(__dirname, '../uploads'));
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}${path.extname(file.originalname)}`);
@@ -44,7 +45,7 @@ const upload = multer({
   storage, 
   fileFilter,
   limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
-});
+}).single('image');
 
 // User routes (admin only)
 router.get('/users', protect, admin, getUsers);
@@ -62,6 +63,16 @@ router.get('/orders', protect, admin, getAllOrders);
 router.put('/orders/:id/status', protect, admin, updateOrderStatus);
 
 // Upload route for product images
-router.post('/upload', protect, admin, upload.single('image'), uploadProductImage);
+router.post('/upload', protect, admin, (req, res, next) => {
+  upload(req, res, (err) => {
+    if (err) {
+      // Log and send error response if something goes wrong
+      console.error("File upload error:", err);
+      return res.status(400).json({ message: err.message });
+    }
+    // If the file is uploaded successfully, call the next handler
+    uploadProductImage(req, res);
+  });
+});
 
 module.exports = router;

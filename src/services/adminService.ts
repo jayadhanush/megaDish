@@ -25,6 +25,7 @@ export const adminService = {
   },
   
   deleteProduct: async (id: string): Promise<{ success: boolean; message: string }> => {
+    console.log("Deleting product with ID:", id); // Debugging line
     const response = await api.delete(`/admin/products/${id}`);
     return response.data;
   },

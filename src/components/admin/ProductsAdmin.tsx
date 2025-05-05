@@ -106,7 +106,7 @@ export const ProductsAdmin = () => {
 
   const handleOpenEditDialog = (product: Product) => {
     setCurrentProduct({
-      id: product.id,
+      id: product._id,
       name: product.name,
       description: product.description,
       price: product.price,
@@ -281,7 +281,7 @@ export const ProductsAdmin = () => {
                       <Button 
                         variant="outline" 
                         size="icon"
-                        onClick={() => handleDeleteProduct(product.id)}
+                        onClick={() => handleDeleteProduct(product._id)}
                       >
                         <Trash2 className="h-4 w-4 text-red-500" />
                       </Button>

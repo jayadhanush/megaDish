@@ -46,11 +46,13 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ initialImage, onIm
       formData.append('image', file);
       
       // Upload image to server
-      const response = await fetch('/api/admin/upload', {
+      console.log(localStorage.getItem('token'));
+      const token1 = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:5000/api/admin/upload`, {
         method: 'POST',
         body: formData,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token1}`,
         },
       });
       
