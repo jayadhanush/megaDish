@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,76 +10,95 @@ import {
   Tooltip, 
   Legend, 
   ResponsiveContainer,
-  BarChart,
-  Bar,
   PieChart,
   Pie,
   Cell
 } from 'recharts';
 import { adminService } from '@/services/adminService';
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28EFF'];
 
 export const AnalyticsAdmin = () => {
-  const [salesData, setSalesData] = useState([]);
-  const [productData, setProductData] = useState([]);
-  const [userData, setUserData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [salesData, setSalesData] = useState([]);  // Sales data state
+  const [productData, setProductData] = useState([]);  // Product category data state
+  const [userData, setUserData] = useState([]);  // User activity data state
+  const [loading, setLoading] = useState(true);  // Loading state
 
-  // Sample data for demonstration - in a real app this would come from the API
-  const sampleSalesData = [
-    { name: 'Jan', total: 2400 },
-    { name: 'Feb', total: 1398 },
-    { name: 'Mar', total: 9800 },
-    { name: 'Apr', total: 3908 },
-    { name: 'May', total: 4800 },
-    { name: 'Jun', total: 3800 },
-    { name: 'Jul', total: 4300 },
-  ];
+  const getCategoryData = async () => {
+    try {
+      const smpdata = await adminService.getCategory();
+      return smpdata; // This will return the category data
+    } catch (error) {
+      console.error('Error fetching category data:', error);
+      return [];
+    }
+  };
 
-  
+  const getUserJoinData = async () => {
+    try {
+      const response = await adminService.getUsers();
+      // Extract and group users by their join date (month)
+      const monthlyUserData = response.reduce((acc, user) => {
+        const month = new Date(user.createdAt).toLocaleString('default', { month: 'short' });
+        if (acc[month]) {
+          acc[month]++;
+        } else {
+          acc[month] = 1;
+        }
+        return acc;
+      }, {});
 
-  const sampleProductData = [
-    { name: 'Electronics', value: 400 },
-    { name: 'Clothing', value: 300 },
-    { name: 'Books', value: 300 },
-    { name: 'Home & Kitchen', value: 200 },
-    { name: 'Sports', value: 100 },
-  ];
+      // Convert the data into an array for use in the chart
+      const formattedData = Object.keys(monthlyUserData).map((month) => ({
+        name: month,
+        usersJoined: monthlyUserData[month],
+      }));
 
-  const sampleUserData = [
-    { name: 'Week 1', users: 400, orders: 240 },
-    { name: 'Week 2', users: 300, orders: 139 },
-    { name: 'Week 3', users: 200, orders: 980 },
-    { name: 'Week 4', users: 278, orders: 390 },
-  ];
+      return formattedData;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      return [];
+    }
+  };
 
-  // Colors for pie chart
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28EFF'];
-
+  // Load data asynchronously when component mounts
   useEffect(() => {
-    // In a real application, you would fetch real analytics data
-    const fetchAnalytics = async () => {
+    const loadData = async () => {
       try {
         setLoading(true);
-        // Simulate API call for analytics
-        // const data = await adminService.getAnalytics();
         
-        // For now, just use sample data after a delay to simulate loading
-        setTimeout(() => {
-          setSalesData(sampleSalesData);
-          setProductData(sampleProductData);
-          setUserData(sampleUserData);
-          setLoading(false);
-        }, 1000);
+        // Fetch sample data
+        const sampleProductData = await getCategoryData();
+        console.log(sampleProductData); // To check the fetched data
+
+        const sampleSalesData = [
+          { name: 'Jan', total: 2400 },
+          { name: 'Feb', total: 1398 },
+          { name: 'Mar', total: 9800 },
+          { name: 'Apr', total: 3908 },
+          { name: 'May', total: 4800 },
+          { name: 'Jun', total: 3800 },
+          { name: 'Jul', total: 4300 },
+        ];
+
+        // Fetch user join data
+        const sampleUserJoinData = await getUserJoinData();
+        console.log(sampleUserJoinData); // To check the fetched data
+
+        // Set the data after fetching
+        setSalesData(sampleSalesData);
+        setProductData(sampleProductData);  // Set product data fetched from API
+        setUserData(sampleUserJoinData); // Set the user join data
+        setLoading(false);
       } catch (error) {
-        console.error('Error fetching analytics:', error);
+        console.error('Error loading data:', error);
         setLoading(false);
       }
     };
-    
-    fetchAnalytics();
-  }, []);
 
-  // Format currency
+    loadData();
+  }, []);  // Empty dependency array to run once when component mounts
+
+  // Format currency function
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -88,7 +106,7 @@ export const AnalyticsAdmin = () => {
     }).format(amount);
   };
 
-  // Overview cards
+  // Overview cards data
   const overviewCards = [
     {
       title: 'Total Revenue',
@@ -123,7 +141,7 @@ export const AnalyticsAdmin = () => {
       ) : (
         <>
           {/* Overview Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {overviewCards.map((card, index) => (
               <Card key={index}>
                 <CardHeader className="pb-2">
@@ -139,7 +157,7 @@ export const AnalyticsAdmin = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </div> */}
 
           {/* Analytics Tabs */}
           <Tabs defaultValue="sales">
@@ -147,15 +165,13 @@ export const AnalyticsAdmin = () => {
               <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="users">User Activity</TabsTrigger>
             </TabsList>
-            
 
-            
             {/* Products Tab */}
             <TabsContent value="products" className="mt-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Sales by Category</CardTitle>
-                  <CardDescription>Distribution of product sales across categories</CardDescription>
+                  <CardTitle>Products by Category</CardTitle>
+                  <CardDescription>Distribution of product across categories</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="h-[300px]">
@@ -183,26 +199,25 @@ export const AnalyticsAdmin = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             {/* Users Tab */}
             <TabsContent value="users" className="mt-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>User Activity</CardTitle>
-                  <CardDescription>Weekly new users and orders comparison</CardDescription>
+                  <CardTitle>Users Joined Monthly</CardTitle>
+                  <CardDescription>Number of new users joined each month</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={userData}>
+                      <LineChart data={userData}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="users" name="New Users" fill="#8884d8" />
-                        <Bar dataKey="orders" name="Orders Placed" fill="#82ca9d" />
-                      </BarChart>
+                        <Line type="monotone" dataKey="usersJoined" stroke="#0088FE" />
+                      </LineChart>
                     </ResponsiveContainer>
                   </div>
                 </CardContent>

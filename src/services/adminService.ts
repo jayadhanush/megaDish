@@ -66,5 +66,26 @@ export const adminService = {
   getAnalytics: async () => {
     const response = await api.get('/admin/analytics');
     return response.data;
+  },
+
+  getCategory: async () => {
+    const categoryCount = {};
+    const response = await api.get('/products/');
+  
+    response.data.forEach(product => {
+      const category = product.category;
+      if (category in categoryCount) {
+        categoryCount[category]++;
+      } else {
+        categoryCount[category] = 1;
+      }
+    });
+    const categoryArray = Object.entries(categoryCount).map(([category, count]) => ({
+      name: category,
+      value: count,
+    }));
+    return categoryArray;
+
   }
+  
 };

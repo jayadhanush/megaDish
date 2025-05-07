@@ -7,7 +7,7 @@ const Order = require('../models/orderModel');
 // @route   POST /api/payments/create-intent
 // @access  Private
 const createPaymentIntent = asyncHandler(async (req, res) => {
-  const { amount, currency = 'usd', orderId } = req.body;
+  const { amount, currency = 'inr', orderId } = req.body;
 
   // Validate the order exists and belongs to the user
   const order = await Order.findById(orderId);
