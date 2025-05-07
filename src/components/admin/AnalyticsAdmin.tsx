@@ -36,6 +36,8 @@ export const AnalyticsAdmin = () => {
     { name: 'Jul', total: 4300 },
   ];
 
+  
+
   const sampleProductData = [
     { name: 'Electronics', value: 400 },
     { name: 'Clothing', value: 300 },
@@ -141,38 +143,12 @@ export const AnalyticsAdmin = () => {
 
           {/* Analytics Tabs */}
           <Tabs defaultValue="sales">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="sales">Sales</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="users">User Activity</TabsTrigger>
             </TabsList>
             
-            {/* Sales Tab */}
-            <TabsContent value="sales" className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Sales Overview</CardTitle>
-                  <CardDescription>Monthly sales data for the current year</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-[300px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart
-                        data={salesData}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip formatter={(value) => formatCurrency(Number(value))} />
-                        <Legend />
-                        <Line type="monotone" dataKey="total" stroke="#8884d8" activeDot={{ r: 8 }} />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
+
             
             {/* Products Tab */}
             <TabsContent value="products" className="mt-6">

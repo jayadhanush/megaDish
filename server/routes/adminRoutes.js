@@ -19,12 +19,16 @@ const { protect, admin } = require('../middleware/authMiddleware');
 // Set up multer storage for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log("File upload destination:", file);
-    console.log("File destination:", path.join(__dirname, '../uploads'));
+    console.log(req);
+    const uploadPath = path.join(__dirname, '\\uploads');
+    console.log(__dirname)
+    console.log("Upload destination (absolute):", uploadPath);
     cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
-    cb(null, `${Date.now()}${path.extname(file.originalname)}`);
+    const uniqueName = `${Date.now()}${path.extname(file.originalname)}`;
+    console.log("Generated filename:", uniqueName);
+    cb(null, uniqueName);
   }
 });
 

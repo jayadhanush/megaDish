@@ -53,6 +53,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ initialImage, onIm
         body: formData,
         headers: {
           Authorization: `Bearer ${token1}`,
+
         },
       });
       
@@ -63,8 +64,9 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ initialImage, onIm
       }
       
       const data = await response.json();
-      setImage(data.imageUrl);
-      onImageUploaded(data.imageUrl);
+      console.log(data);
+      setImage("http://localhost:5000"+data.imageUrl);
+      onImageUploaded("http://localhost:5000"+data.imageUrl);
       
       toast({
         title: "Image uploaded",

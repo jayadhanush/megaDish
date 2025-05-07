@@ -13,8 +13,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
 
-  const product = products.find((p) => p.id === id);
-
+  const product = products.find((p) => p._id === id);
   if (!product) {
     return (
       <Layout>
