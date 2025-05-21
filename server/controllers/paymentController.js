@@ -1,6 +1,8 @@
-
+const dotenv = require('dotenv');
+dotenv.config();
 const asyncHandler = require('express-async-handler');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+//console.log(process.env.STRIPE_SECRET_KEY);
 const Order = require('../models/orderModel');
 
 // @desc    Create a payment intent with Stripe
@@ -8,7 +10,7 @@ const Order = require('../models/orderModel');
 // @access  Private
 const createPaymentIntent = asyncHandler(async (req, res) => {
   const { amount, currency = 'inr', orderId } = req.body;
-
+  console.log(req.body)
   // Validate the order exists and belongs to the user
   const order = await Order.findById(orderId);
   if (!order) {

@@ -56,7 +56,8 @@ export const CheckoutForm = () => {
       };
       
       const order = await orderService.createOrder(orderData);
-      setOrderId(order.id);
+      console.log(order);
+      setOrderId(order._id);
       
       toast({
         title: "Order Created",

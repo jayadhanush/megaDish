@@ -20,6 +20,8 @@ export const adminService = {
   },
   
   updateProduct: async (id: string, productData: Partial<ProductCreateData>): Promise<Product> => {
+    console.log("Updating product with ID:", id); // Debugging line
+
     const response = await api.put(`/admin/products/${id}`, productData);
     return response.data;
   },

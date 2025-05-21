@@ -12,25 +12,7 @@ export const AdminHeader = () => {
         </p>
       </div>
       
-      <div className="flex gap-6">
-        <div className="flex items-center gap-2">
-          <LayoutDashboard className="w-5 h-5 text-blue-500" />
-          <div>
-            <p className="text-sm text-muted-foreground">Products</p>
-            <p className="font-medium">9 Products</p>
-          </div>
-        </div>
-        
-        
-        
-        <div className="flex items-center gap-2">
-          <User className="w-5 h-5 text-purple-500" />
-          <div>
-            <p className="text-sm text-muted-foreground">Customers</p>
-            <p className="font-medium">28 Active</p>
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 };

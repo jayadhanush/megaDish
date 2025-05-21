@@ -11,10 +11,11 @@ export const paymentService = {
   // Create a payment intent using Stripe
   createPaymentIntent: async (paymentData: PaymentIntentData) => {
     try {
+      console.log(paymentData);
       const response = await api.post('/payments/create-intent', paymentData);
       return response.data;
     } catch (error) {
-      console.error('Error creating payment intent:', error);
+      console.error('Error creating payment intentss:', error);
       throw error;
     }
   },

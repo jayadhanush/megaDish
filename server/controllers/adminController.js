@@ -63,7 +63,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
   if (user) {
-    await user.remove();
+    await user.deleteOne();
     res.json({ message: 'User removed' });
   } else {
     res.status(404);
@@ -110,7 +110,6 @@ const updateProduct = asyncHandler(async (req, res) => {
   } = req.body;
 
   const product = await Product.findById(req.params.id);
-
   if (product) {
     product.name = name || product.name;
     product.price = price || product.price;
@@ -119,11 +118,13 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.category = category || product.category;
     product.countInStock = countInStock || product.countInStock;
     product.featured = featured !== undefined ? featured : product.featured;
-
+    console.log("htest");
     const updatedProduct = await product.save();
+    console.log("htest2");
     res.json(updatedProduct);
   } else {
     res.status(404);
+    console.log("Product not found"); 
     throw new Error('Product not found');
   }
 });

@@ -13,7 +13,7 @@ import { paymentService } from '@/services/paymentService';
 
 // Load Stripe outside of component render to avoid recreating the Stripe object
 // Replace with your Stripe publishable key
-const stripePromise = loadStripe('pk_test_your_stripe_publishable_key');
+const stripePromise = loadStripe('pk_test_51OwPWWSHQbFrWztR4H9cuWij4ot7rlmsLdZi5fP4pOLK1ZG6boeppS4r2lJw2QeHttRotgMcLxeQNLDNBn3ynfd600KrpfugHB');
 
 interface PaymentFormProps {
   amount: number;

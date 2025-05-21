@@ -162,6 +162,7 @@ export const ProductsAdmin = () => {
       }
 
       if (isEditing && currentProduct.id) {
+        console.log("truing to update");
         await adminService.updateProduct(currentProduct.id, currentProduct);
         toast({
           title: "Success",
