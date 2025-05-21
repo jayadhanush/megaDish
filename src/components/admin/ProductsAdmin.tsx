@@ -264,7 +264,7 @@ export const ProductsAdmin = () => {
                   </TableCell>
                   <TableCell className="font-medium">{product.name}</TableCell>
                   <TableCell>{product.category}</TableCell>
-                  <TableCell className="text-right">${product.price.toFixed(2)}</TableCell>
+                  <TableCell className="text-right">₹{product.price.toFixed(2)}</TableCell>
                   <TableCell className="text-center">{product.countInStock}</TableCell>
                   <TableCell className="text-center">
                     {product.featured ? 'Yes' : 'No'}

@@ -57,14 +57,7 @@ export function Footer() {
           <p className="text-gray-300 text-sm">
             © {currentYear} MEGA DISH ANTENNA SATELLITE SYSTEM. All rights reserved.
           </p>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <Link to="/terms" className="text-gray-300 text-sm hover:text-white">
-              Terms of Service
-            </Link>
-            <Link to="/privacy" className="text-gray-300 text-sm hover:text-white">
-              Privacy Policy
-            </Link>
-          </div>
+        
         </div>
       </div>
     </footer>

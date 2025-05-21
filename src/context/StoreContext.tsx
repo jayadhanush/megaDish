@@ -131,6 +131,7 @@ useEffect(() => {
         title: 'Login successful',
         description: `Welcome back, ${user.name}!`,
       });
+     
     } catch (error: any) {
       toast({
         title: 'Login failed',
@@ -152,6 +153,7 @@ useEffect(() => {
         title: 'Logged out',
         description: 'You have been logged out successfully',
       });
+      localStorage.removeItem('cart');
     } catch (error: any) {
       console.error('Logout error', error);
     }

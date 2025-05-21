@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { useStore } from '@/context/StoreContext';
 import { Layout } from '@/components/layout/Layout';
 import { useAuth } from '@/hooks/useAuth';
+import { useEffect } from 'react';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,7 +36,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
-
+ 
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12">
@@ -109,14 +110,7 @@ const Login = () => {
               </p>
             </div>
 
-            <div className="mt-6 border-t border-gray-200 pt-4">
-              <p className="text-sm text-gray-600 text-center mb-2">Demo Account:</p>
-              <p className="text-xs text-gray-500 text-center">Email: demo@example.com</p>
-              <p className="text-xs text-gray-500 text-center">Password: password</p>
-              <p className="text-xs text-gray-500 text-center mt-2">Admin Account:</p>
-              <p className="text-xs text-gray-500 text-center">Email: admin@example.com</p>
-              <p className="text-xs text-gray-500 text-center">Password: admin</p>
-            </div>
+            
           </form>
         </div>
       </div>
